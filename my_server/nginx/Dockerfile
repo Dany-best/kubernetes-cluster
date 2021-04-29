@@ -3,16 +3,19 @@ FROM alpine:3.12
 RUN apk update && apk upgrade
 RUN apk add nginx
 RUN apk add openssl
+RUN apk add supervisor
 
-
-WORKDIR /etc/nginx/sites-available/
-
-COPY ./srcs/start.sh ./
+COPY start.sh ./
 RUN chmod -x ./start.sh
 
 #NGINX CONF
 RUN mkdir -p /run/nginx
-COPY ./srcs/nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+RUN mkdir www
+COPY index.html /www/
+
+#SUPERVISOR
+COPY supervisor.conf /etc/supervisord.conf
 
 #SSL
 RUN openssl req \
