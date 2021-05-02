@@ -26,5 +26,3 @@ RUN openssl req \
 EXPOSE 80 443
 
 CMD sh ./start.sh
-
-
