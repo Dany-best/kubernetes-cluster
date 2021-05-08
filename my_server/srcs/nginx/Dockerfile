@@ -8,7 +8,7 @@ RUN apk add supervisor
 COPY start.sh ./
 RUN chmod -x ./start.sh
 
-#NGINX CONF
+# NGINX CONF
 RUN mkdir -p /run/nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 RUN mkdir www
