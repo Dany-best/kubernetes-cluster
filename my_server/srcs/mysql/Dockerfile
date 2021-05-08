@@ -18,7 +18,7 @@ RUN chmod +x ./mysql.sh &&\
 #SUPERVISOR
 COPY supervisor.conf /etc/supervisord.conf
 
-# Открытие волюма
+#SET VOLUME PATH
 VOLUME ["/var/lib/mysql"]
 
 EXPOSE 3306
