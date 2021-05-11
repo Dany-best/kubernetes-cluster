@@ -28,6 +28,4 @@ RUN chmod +x start.sh
 
 EXPOSE 5000
 
-#RUN sh
-#CMD supervisord
 CMD sh ./start.sh
