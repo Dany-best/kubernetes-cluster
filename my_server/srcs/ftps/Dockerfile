@@ -1,7 +1,8 @@
 FROM alpine:3.12
 
 RUN apk update && apk upgrade
-RUN apk add supervisor vsftpd openssl
+RUN apk add supervisor vsftpd openssl\
+			telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/
 RUN mkdir -p /var/ftp
 
 #SSL
@@ -13,6 +14,7 @@ RUN adduser -D dany && echo "dany:1234" | chpasswd
 
 COPY /vsftpd.conf /etc/vsftpd/vsftpd.conf
 COPY supervisord.conf /etc/supervisord.conf
+COPY /telegraf.conf /etc/telegraf/telegraf.conf
 
 COPY start.sh ./
 RUN chmod +x /etc/vsftpd/vsftpd.conf && chmod +x start.sh

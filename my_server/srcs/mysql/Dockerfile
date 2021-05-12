@@ -2,10 +2,11 @@ FROM alpine:3.12
 
 RUN apk update && apk upgrade
 RUN apk add mysql mysql-client\
-    openrc mariadb mariadb-common mariadb-client
+    openrc mariadb mariadb-common mariadb-client\
+    telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/
 RUN apk add nginx
 RUN apk add openssl
-RUN apk add supervisor
+RUN apk add supervisor telegraf
 
 COPY mysql.sh ./
 COPY wordpress.sql ./
@@ -17,6 +18,9 @@ RUN chmod +x ./mysql.sh &&\
 
 #SUPERVISOR
 COPY supervisor.conf /etc/supervisord.conf
+
+#TELEGRAF
+COPY /telegraf.conf /etc/telegraf/telegraf.conf
 
 #SET VOLUME PATH
 VOLUME ["/var/lib/mysql"]

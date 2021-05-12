@@ -3,7 +3,8 @@ FROM alpine:3.12
 RUN apk update && apk upgrade
 RUN apk add nginx
 RUN apk add openssl
-RUN apk add supervisor
+RUN apk add supervisor\
+       telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/
 
 COPY start.sh ./
 RUN chmod -x ./start.sh
@@ -16,6 +17,9 @@ COPY index.html /www/
 
 #SUPERVISOR
 COPY supervisor.conf /etc/supervisord.conf
+
+#TELEGRAF
+COPY /telegraf.conf /etc/telegraf/telegraf.conf
 
 #SSL
 RUN openssl req \

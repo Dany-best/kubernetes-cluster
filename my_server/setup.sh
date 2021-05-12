@@ -45,4 +45,10 @@ kubectl delete svc ftps-svc;
 docker build -t ftps_image srcs/ftps;
 kubectl apply -f srcs/ftps/ftps.yaml;
 
+#grafana
+kubectl delete deployment grafana-deployment;
+kubectl delete svc grafana-svc;
+docker build -t grafana_image srcs/grafana;
+kubectl apply -f srcs/grafana/grafana.yaml;
+
 minikube dashboard

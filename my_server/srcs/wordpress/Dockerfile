@@ -1,12 +1,16 @@
 FROM alpine:3.12
 
 RUN apk update && apk upgrade
-RUN apk add nginx wget supervisor
+RUN apk add nginx wget supervisor\
+	telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/
 
 #NGINX
 RUN mkdir -p /run/nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 RUN mkdir www
+
+#TELEGRAF
+COPY /telegraf.conf /etc/telegraf/telegraf.conf
 
 #PHP
 RUN apk add php7 php7-fpm php7-common php7-session php7-iconv php7-json\
