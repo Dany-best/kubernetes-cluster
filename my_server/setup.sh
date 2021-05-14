@@ -4,7 +4,7 @@ minikube delete
 kubectl delete --all svc;
 kubectl delete --all deployments;
 kubectl delete --all pods;
-bash start_kube.sh
+minikube start --vm-driver=virtualbox --cpus=4 --memory=4G --disk-size=50G
 docker rmi $(docker images -a -q);
 eval $(minikube docker-env);
 
@@ -50,5 +50,11 @@ kubectl delete deployment grafana-deployment;
 kubectl delete svc grafana-svc;
 docker build -t grafana_image srcs/grafana;
 kubectl apply -f srcs/grafana/grafana.yaml;
+
+#influxdb
+kubectl delete deployment influxdb-deployment;
+kubectl delete svc influxdb-svc;
+docker build -t influxdb_image srcs/influxdb;
+kubectl apply -f srcs/influxdb/influxdb.yaml;
 
 minikube dashboard
