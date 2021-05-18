@@ -6,7 +6,7 @@ metadata:
     metallb.universe.tf/allow-shared-ip: default
 spec:
   selector:
-    app: wp
+    app: wordpress
   type: LoadBalancer
   ports:
     - protocol: TCP
@@ -19,19 +19,19 @@ kind: Deployment
 metadata:
   name: wp-deployment
   labels:
-    app: wp
+    app: wordpress
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: wp
+      app: wordpress
   template:
     metadata:
       labels:
-        app: wp
+        app: wordpress
     spec:
       containers:
-      - name: wp
+      - name: wordpress
         resources:
           limits:
             memory: "128Mi"
